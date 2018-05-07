@@ -7,14 +7,14 @@
   </header>
 <swiper :options="swiperOption">
   <swiper-slide>
-  	<div class="swiper-img-con">
-  	  <img class="swiper-img" src="http://img1.qunarzz.com/piao/fusion/1804/3c/b2e542d1649a9b02.jpg_890x330_ae9ba0f1.jpg"/>
-  	</div>
+    <div class="swiper-img-con">
+       <img class="swiper-img" src="http://img1.qunarzz.com/piao/fusion/1804/3c/b2e542d1649a9b02.jpg_890x330_ae9ba0f1.jpg"/>
+    </div>
   </swiper-slide>
   <swiper-slide>
-  	<div class="swiper-img-con">
-  	  <img class="swiper-img" src="http://img1.qunarzz.com/piao/fusion/1803/30/cea146e3d2eda002.jpg_890x330_f72cb574.jpg"/>
-  	</div>
+    <div class="swiper-img-con">
+     <img class="swiper-img" src="http://img1.qunarzz.com/piao/fusion/1803/30/cea146e3d2eda002.jpg_890x330_f72cb574.jpg"/>
+    </div>
   </swiper-slide>
   <div class="swiper-pagination"  slot="pagination"></div>
 </swiper>
@@ -58,9 +58,9 @@ export default {
     text-align:center;
   }
   .swiper-img-con{
-  	width:100%;
+    width:100%;
   }
   .swiper-img{
-  	width:100%;
+    width:100%;
   }
 </style>
