@@ -18,6 +18,9 @@
   </swiper-slide>
   <div class="swiper-pagination"  slot="pagination"></div>
 </swiper>
+  <div>
+    12313213213
+  </div>
   </div>
 </template>
 
@@ -73,7 +76,10 @@ export default {
     top:0.36rem;
   }
   .swiper-img-con{
+    overflow:hidden;
     width:100%;
+    height:0;
+    padding-bottom:31.25%;
   }
   .swiper-img{
     width:100%;
