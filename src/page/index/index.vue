@@ -6,21 +6,13 @@
     <div class="city">城市</div>
   </header>
 <swiper :options="swiperOption">
-  <swiper-slide>
+  <swiper-slide v-for="item in swiperInfo" :key="item.id">
     <div class="swiper-img-con">
-       <img class="swiper-img" src="http://img1.qunarzz.com/piao/fusion/1804/3c/b2e542d1649a9b02.jpg_890x330_ae9ba0f1.jpg"/>
-    </div>
-  </swiper-slide>
-  <swiper-slide>
-    <div class="swiper-img-con">
-     <img class="swiper-img" src="http://img1.qunarzz.com/piao/fusion/1803/30/cea146e3d2eda002.jpg_890x330_f72cb574.jpg"/>
+       <img class="swiper-img" :src="item.imgUrl"/>
     </div>
   </swiper-slide>
   <div class="swiper-pagination"  slot="pagination"></div>
 </swiper>
-  <div>
-    12313213213
-  </div>
   </div>
 </template>
 
@@ -29,10 +21,27 @@ export default {
   name: 'Index',
   data () {
     return {
+      swiperInfo: [],
       swiperOption: {
-        autoplay: 1000,
-        direction: 'horizontal'
+        autoplay: 3000,
+        direction: 'horizontal',
+        pagination: {
+          el: '.swiper-pagination'
+        },
+        loop: true
       }
+    }
+  },
+  created () {
+    this.getIndexData()
+  },
+  methods: {
+    getIndexData () {
+      this.$http.get('/static/index.json')
+        .then(this.handleGetDataSucc.bind(this))
+    },
+    handleGetDataSucc (res) {
+      this.swiperInfo = res.body.data.swiper
     }
   }
 }
