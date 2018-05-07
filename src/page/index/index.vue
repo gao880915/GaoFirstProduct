@@ -54,9 +54,22 @@ export default {
     border-radius:.1rem;
   }
   .city{
-    width:1.32rem;
+    width:1.14rem;
     line-height:.86rem;
-    text-align:center;
+    text-align:left;
+    text-overflow:ellipsis;
+    text-wrap:nowrap;
+  }
+  .city:after{
+    content:""; 
+    display:block;
+    width:0px;
+    height:0px;
+    border:0.1rem solid #fff;  
+    border-color:white transparent transparent transparent;
+    position:absolute;  
+    right:0.3rem;  
+    top:0.36rem;  
   }
   .swiper-img-con{
     width:100%;
