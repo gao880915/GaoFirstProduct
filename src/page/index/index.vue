@@ -54,22 +54,23 @@ export default {
     border-radius:.1rem;
   }
   .city{
-    width:1.14rem;
+    width:0.7rem;
+    padding-right: 0.44rem;
     line-height:.86rem;
     text-align:left;
     text-overflow:ellipsis;
     text-wrap:nowrap;
   }
   .city:after{
-    content:""; 
+    content:"";
     display:block;
     width:0px;
     height:0px;
-    border:0.1rem solid #fff;  
+    border:0.1rem solid #fff;
     border-color:white transparent transparent transparent;
-    position:absolute;  
-    right:0.3rem;  
-    top:0.36rem;  
+    position:absolute;
+    right:0.3rem;
+    top:0.36rem;
   }
   .swiper-img-con{
     width:100%;
