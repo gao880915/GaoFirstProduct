@@ -22,9 +22,12 @@
         </div>
       </div>
     </div>
-
   </swiper-slide>
 </swiper>
+  <div>
+     <button @click="handleClick(1)">查看详细1</button>
+     <button @click="handleClick(2)">查看详细2</button>
+  </div>
   </div>
 </template>
 
@@ -67,10 +70,19 @@ export default {
         this.swiperInfo = res.body.data.swiper
         this.iconInfo = body.data.icons
       }
+    },
+    handleClick (id) {
+      this.$router.push('/detail/' + id)
     }
   },
   created () {
     this.getIndexData()
+  },
+  activated () {
+    console.log('activated')
+  },
+  deactivated () {
+    console.log('deactivated')
   }
 }
 </script>
