@@ -13,6 +13,18 @@
   </swiper-slide>
   <div class="swiper-pagination"  slot="pagination"></div>
 </swiper>
+<swiper>
+  <swiper-slide v-for="(pageinfo,index) in pages" :key="index">
+    <div class="icon-wrapper">
+      <div v-for="item in pageinfo" :key="item.id" class="icon-item">
+        <div class="icon-img-con">
+          <img class="icon-img" :src="item.imgUrl"/>
+        </div>
+      </div>
+    </div>
+
+  </swiper-slide>
+</swiper>
   </div>
 </template>
 
@@ -22,18 +34,27 @@ export default {
   data () {
     return {
       swiperInfo: [],
+      iconInfo: [],
       swiperOption: {
         autoplay: 3000,
-        direction: 'horizontal',
-        pagination: {
-          el: '.swiper-pagination'
-        },
+        pagination: '.swiper-pagination',
         loop: true
-      }
+      },
+      iconsOption: {}
     }
   },
-  created () {
-    this.getIndexData()
+  computed: {
+    pages () {
+      const pages = []
+      this.iconInfo.forEach((value, index) => {
+        let page = Math.floor(index / 8)
+        if (!pages[page]) {
+          pages[page] = []
+        }
+        pages[page].push(value)
+      })
+      return pages
+    }
   },
   methods: {
     getIndexData () {
@@ -41,8 +62,15 @@ export default {
         .then(this.handleGetDataSucc.bind(this))
     },
     handleGetDataSucc (res) {
-      this.swiperInfo = res.body.data.swiper
+      const body = res.body
+      if (body && body.data && body.data.swiper) {
+        this.swiperInfo = res.body.data.swiper
+        this.iconInfo = body.data.icons
+      }
     }
+  },
+  created () {
+    this.getIndexData()
   }
 }
 </script>
@@ -91,6 +119,22 @@ export default {
     padding-bottom:31.25%;
   }
   .swiper-img{
+    width:100%;
+  }
+  .icon-wrapper{
+  }
+  .icon-item{
+    box-sizing:border-box;
+    width:25%;
+    float:left;
+    padding:.4rem;
+  }
+  .icon-img-con{
+    width:100%;
+    height:0;
+    padding-bottom:100%;
+  }
+  .icon-img{
     width:100%;
   }
 </style>
