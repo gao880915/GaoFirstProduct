@@ -5,25 +5,8 @@
     <div class="search"></div>
     <div class="city">城市</div>
   </header>
-<swiper :options="swiperOption">
-  <swiper-slide v-for="item in swiperInfo" :key="item.id">
-    <div class="swiper-img-con">
-       <img class="swiper-img" :src="item.imgUrl"/>
-    </div>
-  </swiper-slide>
-  <div class="swiper-pagination"  slot="pagination"></div>
-</swiper>
-<swiper>
-  <swiper-slide v-for="(pageinfo,index) in pages" :key="index">
-    <div class="icon-wrapper">
-      <div v-for="item in pageinfo" :key="item.id" class="icon-item">
-        <div class="icon-img-con">
-          <img class="icon-img" :src="item.imgUrl"/>
-        </div>
-      </div>
-    </div>
-  </swiper-slide>
-</swiper>
+<index-swiper :swiperInfo="swiperInfo"></index-swiper>
+<icon-swiper :pages="pages"></icon-swiper>
   <div>
      <button @click="handleClick(1)">查看详细1</button>
      <button @click="handleClick(2)">查看详细2</button>
@@ -32,18 +15,18 @@
 </template>
 
 <script>
+import IndexSwiper from './swiper'
+import IconSwiper from './iconSwiper'
 export default {
   name: 'Index',
+  components: {
+    IndexSwiper,
+    IconSwiper
+  },
   data () {
     return {
       swiperInfo: [],
-      iconInfo: [],
-      swiperOption: {
-        autoplay: 3000,
-        pagination: '.swiper-pagination',
-        loop: true
-      },
-      iconsOption: {}
+      iconInfo: []
     }
   },
   computed: {
@@ -123,30 +106,5 @@ export default {
     position:absolute;
     right:0.3rem;
     top:0.36rem;
-  }
-  .swiper-img-con{
-    overflow:hidden;
-    width:100%;
-    height:0;
-    padding-bottom:31.25%;
-  }
-  .swiper-img{
-    width:100%;
-  }
-  .icon-wrapper{
-  }
-  .icon-item{
-    box-sizing:border-box;
-    width:25%;
-    float:left;
-    padding:.4rem;
-  }
-  .icon-img-con{
-    width:100%;
-    height:0;
-    padding-bottom:100%;
-  }
-  .icon-img{
-    width:100%;
   }
 </style>
