@@ -8,8 +8,10 @@
 <index-swiper :swiperInfo="swiperInfo"></index-swiper>
 <icon-swiper :pages="pages"></icon-swiper>
   <div>
-     <button @click="handleClick(1)">查看详细1</button>
-     <button @click="handleClick(2)">查看详细2</button>
+     <!--<button @click="handleClick(1)">查看详细1</button>
+     <button @click="handleClick(2)">查看详细2</button>-->
+     <router-link>查看详细1</router-link>
+     <router-link>查看详细2</router-link>
   </div>
   </div>
 </template>
@@ -54,9 +56,9 @@ export default {
         this.iconInfo = body.data.icons
       }
     },
-    handleClick (id) {
-      this.$router.push('/detail/' + id)
-    }
+//  handleClick (id) {
+//    this.$router.push('/detail/' + id)
+//  }
   },
   created () {
     this.getIndexData()
