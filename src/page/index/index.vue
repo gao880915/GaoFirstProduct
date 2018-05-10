@@ -7,12 +7,18 @@
   </header>
 <index-swiper :swiperInfo="swiperInfo"></index-swiper>
 <icon-swiper :pages="pages"></icon-swiper>
-  <div>
-     <!--<button @click="handleClick(1)">查看详细1</button>
-     <button @click="handleClick(2)">查看详细2</button>-->
-     <!--<router-link>查看详细1</router-link>
-     <router-link>查看详细2</router-link>-->
-  </div>
+    <ul>
+      <li style="height: .5rem;" v-for="item in childList" :key="item.id">
+        <router-link style="height: .5rem;" :to="'/detail/' + item.id">
+          <div style="font-size:.5rem;background: lightblue;line-height: .5rem;">
+            {{item.name}}
+          </div>
+        </router-link>
+      </li>
+    </ul>
+    <button @click="handleClickPush('0003')"> handleClickPush </button>
+    <button @click="handleClickReplace('0004')"> handleClickReplace </button>
+    <button @click="handleClickName('0005')"> handleClickName </button>
   </div>
 </template>
 
@@ -28,7 +34,14 @@ export default {
   data () {
     return {
       swiperInfo: [],
-      iconInfo: []
+      iconInfo: [],
+      childList: [{
+        'id': '0001',
+        'name': '北京'
+      }, {
+        'id': '0002',
+        'name': '上海'
+      }]
     }
   },
   computed: {
@@ -56,8 +69,24 @@ export default {
         this.iconInfo = body.data.icons
       }
     },
-    handleClick (id) {
+    handleClickPush (id) {
+      // 编程式导航
       this.$router.push('/detail/' + id)
+    },
+    handleClickReplace (id) {
+      // 编程式导航
+      this.$router.replace('/detail/' + id + '/ticket')
+    },
+    handleClickName (id) {
+      this.$router.push({
+        name: 'sight',
+        params: {
+          id: id
+        },
+        query: {
+          name: 'dell'
+        }
+      })
     }
   },
   created () {
@@ -65,9 +94,6 @@ export default {
   },
   activated () {
     console.log('activated')
-  },
-  deactivated () {
-    console.log('deactivated')
   }
 }
 </script>

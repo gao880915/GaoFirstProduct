@@ -9,7 +9,17 @@
 export default{
   props: ['id'],
   mounted () {
-    console.log(this.id)
+    console.log(this.id + ' ' + this.$route.query.name)
+  },
+  //  watch: {
+  //  '$route' (to, from) {
+  //    console.log(to)
+  //    console.log(from)
+  //  }
+  //  }
+  beforeRouteUpdate (to, from, index) {
+    console.log(to)
+    console.log(from)
   }
 }
 </script>

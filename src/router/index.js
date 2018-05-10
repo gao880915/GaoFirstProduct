@@ -13,10 +13,23 @@ export default new Router({
       name: 'index',
       component: Index
     }, {
-      path: '/detail/:id',
+      path: '/detail/:id/',
       name: 'detail',
       component: Detail,
-      props: true
+      props: true,
+      children: [{
+        path: 'sight',
+        name: 'sight',
+        component: {
+          template: '<div>sight</div>'
+        }
+      }, {
+        path: 'ticket',
+        name: 'ticket',
+        component: {
+          template: '<div>ticket</div>'
+        }
+      }]
     }
   ]
 })
