@@ -11,6 +11,7 @@ export default{
   mounted () {
     console.log(this.id + ' ' + this.$route.query.name)
   },
+  // 监控路由变化
   //  watch: {
   //  '$route' (to, from) {
   //    console.log(to)
