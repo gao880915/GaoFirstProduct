@@ -7,9 +7,9 @@
   </header>
 <index-swiper :swiperInfo="swiperInfo"></index-swiper>
 <icon-swiper :pages="pages"></icon-swiper>
-  <scroller>
-    <div class="wrapper" ref="hotContainer">
-      <ul class="hot border-topbottom">
+  <scroller class="wrapper" ref="hotContainer" :data="childList">
+    <!--<div class="wrapper" ref="hotContainer">
+      <ul class="hot border-topbottom">-->
         <li class="hotitem" v-for="item in childList" :key="item.id">
           <router-link  :to="'/detail/' + item.id">
             <div class="hotitemcontent">
@@ -18,8 +18,8 @@
             </div>
           </router-link>
         </li>
-      </ul>
-    </div>
+      <!--</ul>
+    </div>-->
   </scroller>
     <button @click="handleClickPush('0003')"> handleClickPush </button>
     <button @click="handleClickReplace('0004')"> handleClickReplace </button>
@@ -30,7 +30,7 @@
 <script>
 import IndexSwiper from './swiper'
 import IconSwiper from './iconSwiper'
-import BScroll from 'better-scroll'
+//  import BScroll from 'better-scroll'
 import Scroller from 'components/scroller/scroller'
 export default {
   name: 'Index',
@@ -95,16 +95,16 @@ export default {
   created () {
     this.getIndexData()
   },
-  mounted () {
-    this.scroll = new BScroll(this.$refs.hotContainer)
-  },
-  watch: {
-    childList: function () {
-      this.$nextTick(() => {
-        this.scroll.refresh()
-      })
-    }
-  }
+  // mounted () {
+  //  this.scroll = new BScroll(this.$refs.hotContainer)
+  // },
+  //  watch: {
+  //  childList: function () {
+  //    this.$nextTick(() => {
+  //      this.scroll.refresh()
+  //    })
+  //  }
+  // }
 }
 </script>
 
@@ -161,6 +161,7 @@ export default {
     line-height: .5rem;
     overflow: hidden;
     border-bottom:1px solid red;
+    list-style:none;
   }
   .hotitemcontent{
     overflow:hidden;

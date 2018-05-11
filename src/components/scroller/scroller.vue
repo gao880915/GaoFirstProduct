@@ -1,12 +1,23 @@
 <template>
-  <div id="">
-    <slot ref="test"></slot>
+  <div ref="wrapper">
+    <div>
+      <slot></slot>
+    </div>
   </div>
 </template>
 <script type="text/javascript">
+import BScroll from 'better-scroll'
 export default {
+  props: ['data'],
   mounted () {
-    console.log(this.$slots)
+    this.scroll = new BScroll(this.$refs.wrapper)
+  },
+  watch: {
+    data () {
+      this.$nextTick(() => {
+        this.scroll.refresh()
+      })
+    }
   }
 }
 </script>
