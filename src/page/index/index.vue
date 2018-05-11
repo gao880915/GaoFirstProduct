@@ -7,15 +7,18 @@
   </header>
 <index-swiper :swiperInfo="swiperInfo"></index-swiper>
 <icon-swiper :pages="pages"></icon-swiper>
-    <ul>
-      <li style="height: .5rem;" v-for="item in childList" :key="item.id">
-        <router-link style="height: .5rem;" :to="'/detail/' + item.id">
-          <div style="font-size:.5rem;background: lightblue;line-height: .5rem;">
-            {{item.name}}
+  <div class="wrapper" ref="hotContainer">
+    <ul class="hot border-topbottom">
+      <li class="hotitem" v-for="item in childList" :key="item.id">
+        <router-link  :to="'/detail/' + item.id">
+          <div class="hotitemcontent">
+            <img class="hotitemimg" :src="item.imgsrc"/>
+            <div>{{item.name}}</div>
           </div>
         </router-link>
       </li>
     </ul>
+  </div>
     <button @click="handleClickPush('0003')"> handleClickPush </button>
     <button @click="handleClickReplace('0004')"> handleClickReplace </button>
     <button @click="handleClickName('0005')"> handleClickName </button>
@@ -25,6 +28,7 @@
 <script>
 import IndexSwiper from './swiper'
 import IconSwiper from './iconSwiper'
+import BScroll from 'better-scroll'
 export default {
   name: 'Index',
   components: {
@@ -35,13 +39,7 @@ export default {
     return {
       swiperInfo: [],
       iconInfo: [],
-      childList: [{
-        'id': '0001',
-        'name': '北京'
-      }, {
-        'id': '0002',
-        'name': '上海'
-      }]
+      childList: []
     }
   },
   computed: {
@@ -67,6 +65,7 @@ export default {
       if (body && body.data && body.data.swiper) {
         this.swiperInfo = res.body.data.swiper
         this.iconInfo = body.data.icons
+        this.childList = body.data.hot
       }
     },
     handleClickPush (id) {
@@ -92,8 +91,16 @@ export default {
   created () {
     this.getIndexData()
   },
-  activated () {
-    console.log('activated')
+  mounted () {
+    this.scroll = new BScroll(this.$refs.hotContainer)
+    console.log(this.scroll)
+  },
+  watch: {
+    childList: function () {
+      this.$nextTick(() => {
+        this.scroll.refresh()
+      })
+    }
   }
 }
 </script>
@@ -134,5 +141,31 @@ export default {
     position:absolute;
     right:0.3rem;
     top:0.36rem;
+  }
+  .hot::before,
+  .hot::after{
+    border-color:red;
+  }
+  .wrapper{
+    overflow:hidden;
+    width:100%;
+    height:4rem;
+  }
+  .hotitem{
+    height:2.4rem;
+    font-size:.5rem;
+    background: lightblue;
+    line-height: .5rem;
+    overflow: hidden;
+    border-bottom:1px solid red;
+  }
+  .hotitemcontent{
+    overflow:hidden;
+    width:2rem;
+    height:0;
+    padding-bottom:50%;
+  }
+  .hotitemimg{
+    width:100%;
   }
 </style>
