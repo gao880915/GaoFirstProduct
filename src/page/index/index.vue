@@ -7,18 +7,20 @@
   </header>
 <index-swiper :swiperInfo="swiperInfo"></index-swiper>
 <icon-swiper :pages="pages"></icon-swiper>
-  <div class="wrapper" ref="hotContainer">
-    <ul class="hot border-topbottom">
-      <li class="hotitem" v-for="item in childList" :key="item.id">
-        <router-link  :to="'/detail/' + item.id">
-          <div class="hotitemcontent">
-            <img class="hotitemimg" :src="item.imgsrc"/>
-            <div>{{item.name}}</div>
-          </div>
-        </router-link>
-      </li>
-    </ul>
-  </div>
+  <scroller>
+    <div class="wrapper" ref="hotContainer">
+      <ul class="hot border-topbottom">
+        <li class="hotitem" v-for="item in childList" :key="item.id">
+          <router-link  :to="'/detail/' + item.id">
+            <div class="hotitemcontent">
+              <img class="hotitemimg" :src="item.imgsrc"/>
+              <div>{{item.name}}</div>
+            </div>
+          </router-link>
+        </li>
+      </ul>
+    </div>
+  </scroller>
     <button @click="handleClickPush('0003')"> handleClickPush </button>
     <button @click="handleClickReplace('0004')"> handleClickReplace </button>
     <button @click="handleClickName('0005')"> handleClickName </button>
@@ -29,11 +31,13 @@
 import IndexSwiper from './swiper'
 import IconSwiper from './iconSwiper'
 import BScroll from 'better-scroll'
+import Scroller from 'components/scroller/scroller'
 export default {
   name: 'Index',
   components: {
     IndexSwiper,
-    IconSwiper
+    IconSwiper,
+    Scroller
   },
   data () {
     return {
@@ -93,7 +97,6 @@ export default {
   },
   mounted () {
     this.scroll = new BScroll(this.$refs.hotContainer)
-    console.log(this.scroll)
   },
   watch: {
     childList: function () {
